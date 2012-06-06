@@ -203,18 +203,39 @@ var BWidgetRegistry = {
             }
         ],
     },
-
+    /**
+    *Support background images using <div>
+    */
+    Background:{
+        parent: "Base",
+        allowIn: [],
+        BackgroundImgProperties: function (node,code) {
+        code = BWidgetRegistry.Base.applyProperties(node, code);
+        if (node.getProperty("BackgroundImg") != "") {
+                var backgroundImg = node.getProperty("BackgroundImg");
+                code.attr("style", "background-image:url('"+ backgroundImg +"');"+
+                "background-attachment:scroll;background-repeat:no-repeat;background-size:cover;");
+        }
+        return code;
+        },
+        properties: {
+            BackgroundImg: {
+                type: "string",
+                defaultValue: ""
+            }
+        }
+    },
     /**
      * Represents a page or dialog in the application. Includes "top" zone
      * for an optional header, "content" zone for the Content area, and "bottom"
      * zone for an optional footer.
      */
     Page: {
-        parent: "Base",
+        parent: "Background",
         allowIn: "Design",
         template: function (node) {
             var prop, code = $('<div data-role="page"></div>');
-            code.attr("id", node.getProperty("id"));
+            code = BWidgetRegistry.Background.BackgroundImgProperties(node,code);
 
             // don't write data-theme if it's using the default
             prop = node.getProperty("theme");
@@ -267,13 +288,13 @@ var BWidgetRegistry = {
      * for optional buttons, and "bottom" zone for an optional navbar.
      */
     Header: {
-        parent: "Base",
+        parent: "Background",
         allowIn: "Page",
         dragHeader: true,
         paletteImageName: "jqm_header.svg",
         template: function (node) {
             var prop, code = $('<div data-role="header"><h1></h1></div>');
-            code = BWidgetRegistry.Base.applyProperties(node, code);
+            code = BWidgetRegistry.Background.BackgroundImgProperties(node,code);
 
             // only write data-position if it's being set to fixed
             if (node.getProperty("position") === "fixed") {
@@ -332,13 +353,13 @@ var BWidgetRegistry = {
      * Represents a footer object at the bottom of a page.
      */
     Footer: {
-        parent: "Base",
+        parent: "Background",
         allowIn: "Page",
         dragHeader: true,
         paletteImageName: "jqm_footer.svg",
         template: function (node) {
             var prop, code = $('<div data-role="footer"></div>');
-            code = BWidgetRegistry.Base.applyProperties(node, code);
+              code = BWidgetRegistry.Background.BackgroundImgProperties(node,code);
 
             // only write data-position if it's being set to fixed
             if (node.getProperty("position") === "fixed") {
