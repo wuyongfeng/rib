@@ -28,7 +28,7 @@
                 }
             ],
             "List views": [
-                 "List", "OrderedList", "ListItem", "ListDivider", "ListButton"
+                 "List", "OrderedList", "SplitList", "IconList", "ThumbnailsList", "ListItem", "IconListItem", "ThumbnailsListItem", "SplitListItem", "ListDivider", "ListButton", "ImgButton"
             ],
             "Output": ["ProgressBar"],
             "Image": ["Image"]
@@ -49,7 +49,7 @@
                 "#0._hidden_node.tizen_input_date",
                 "#0._hidden_node.tizen_input_color", "ProgressBar"
             ],
-            "Other Widgets":["Image"]
+            "Simple HTML":["Image"]
         }
     ]
 }]

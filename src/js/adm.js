@@ -1287,8 +1287,7 @@ ADMNode.prototype.isMoveable = function () {
  */
 ADMNode.prototype.isContainer = function () {
     var zones = BWidget.getZones(this.getType());
-    return (zones.length === 1 &&
-            BWidget.getZoneCardinality(this.getType(),zones[0]) === "N");
+    return zones.length > 0;
 };
 
 /**
